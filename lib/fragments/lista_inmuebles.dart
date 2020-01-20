@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:inmoob/bloc/inmuebles_bloc.dart';
 import 'package:inmoob/detalles_venta/detalles_casa_venta.dart';
 //import 'package:inmoob/providers/db_provider.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
 import 'package:inmoob/providers/db_provider.dart';
 import 'package:share_extend/share_extend.dart';
+import 'package:wc_flutter_share/wc_flutter_share.dart';
 
 class ListaInmuebles extends StatelessWidget {
   final inmueblesBloc = InmueblesBloc();
@@ -68,9 +70,8 @@ class ListaInmuebles extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 13.0, fontWeight: FontWeight.normal),
                         ),
-                        Text(
-                          getSimbolo(inmuebles[i].moneda) +' ${inmuebles[i].precio}'
-                        )
+                        Text(getSimbolo(inmuebles[i].moneda) +
+                            ' ${inmuebles[i].precio}')
                       ],
                     ),
                   ),
@@ -90,9 +91,22 @@ class ListaInmuebles extends StatelessWidget {
                         FlatButton.icon(
                           icon: Icon(Icons.share),
                           label: Text('Compartir'),
-                          onPressed: () {
-                            List<String> imageList = inmuebles[i].fotos.split('\n');
-                            ShareExtend.shareMultiple(imageList, 'image');
+                          onPressed: () async {
+                            final ByteData bytes = await rootBundle
+                                .load(firstPath(inmuebles[i].fotos));
+                            await WcFlutterShare.share(
+                                sharePopupTitle: 'share',
+                                subject: 'This is subject',
+                                text: '${inmuebles[i].tipo} en ${inmuebles[i].operacion} en ${inmuebles[i].ubicacion}' +
+                                    '\nNumero de baños: ${inmuebles[i].numeroSanitarios} Numero de cuartos: ${inmuebles[i].numeroRecamaras}' +
+                                    '\nSuperficie total: ${inmuebles[i].superficieTotal} Superficie cubierta: ${inmuebles[i].superficieCubierta}\n' +
+                                    getSimbolo(inmuebles[i].moneda) +
+                                    ' ${inmuebles[i].precio}',
+                                fileName: 'share.png',
+                                mimeType: 'image/png',
+                                bytesOfFile: bytes.buffer.asUint8List());
+                            /*List<String> imageList = inmuebles[i].fotos.split('\n');
+                            ShareExtend.shareMultiple(imageList, 'image');*/
                           },
                         )
                       ],
@@ -127,14 +141,14 @@ class ListaInmuebles extends StatelessWidget {
               inmueble: inmueble,
             ),
           ));
-    } else if(inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta'){
+    } else if (inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta') {
       print('Redirigiendo a renta....');
     }
   }
 
   getSimbolo(String moneda) {
     var string = moneda;
-    String newString = string.substring(string.length-5);
+    String newString = string.substring(string.length - 5);
     return newString;
   }
 }
