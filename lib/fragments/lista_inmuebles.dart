@@ -8,7 +8,6 @@ import 'package:inmoob/detalles_venta/detalles_casa_venta.dart';
 //import 'package:inmoob/providers/db_provider.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
 import 'package:inmoob/providers/db_provider.dart';
-import 'package:share_extend/share_extend.dart';
 import 'package:wc_flutter_share/wc_flutter_share.dart';
 
 class ListaInmuebles extends StatelessWidget {
@@ -105,8 +104,6 @@ class ListaInmuebles extends StatelessWidget {
                                 fileName: 'share.png',
                                 mimeType: 'image/png',
                                 bytesOfFile: bytes.buffer.asUint8List());
-                            /*List<String> imageList = inmuebles[i].fotos.split('\n');
-                            ShareExtend.shareMultiple(imageList, 'image');*/
                           },
                         )
                       ],

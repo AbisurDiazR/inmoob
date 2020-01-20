@@ -27,7 +27,6 @@ dependencies:
   sqflite: ^1.2.0
   path_provider: ^1.5.1
   toast: ^0.1.5
-  share_extend: "^1.1.0"
   wc_flutter_share: ^0.1.1
 
 dev_dependencies:
