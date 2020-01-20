@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
 
-class DetallesTerrenoVenta extends StatefulWidget{
+class DetallesOficinaRenta extends StatefulWidget{
   final Inmueble inmueble;
 
-  const DetallesTerrenoVenta({Key key, this.inmueble}) : super(key: key);
+  const DetallesOficinaRenta({Key key, this.inmueble}) : super(key: key);
 
   @override
-  _DetallesTerrenoVentaState createState() => _DetallesTerrenoVentaState();
+  _DetallesOficinaRentaState createState() => _DetallesOficinaRentaState();
 }
 
-class _DetallesTerrenoVentaState extends State<DetallesTerrenoVenta> {
+class _DetallesOficinaRentaState extends State<DetallesOficinaRenta> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(

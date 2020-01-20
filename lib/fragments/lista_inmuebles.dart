@@ -4,6 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inmoob/bloc/inmuebles_bloc.dart';
+import 'package:inmoob/detalles_renta/detalles_bodega_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_casa_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_cuarto_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_departamento_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_hacienda_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_hotel_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_local_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_oficina_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_rancho_renta.dart';
+import 'package:inmoob/detalles_renta/detalles_terreno_renta.dart';
 import 'package:inmoob/detalles_venta/detalles_bodega_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_casa_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_cuarto_venta.dart';
@@ -180,9 +190,46 @@ class ListaInmuebles extends StatelessWidget {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => DetallesTerrenoVenta(inmueble: inmueble,)
       ));
-    }
-    else if (inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta') {
-      print('Redirigiendo a renta....');
+    }else if (inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta') {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesCasaRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Bodega' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesBodegaRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Cuarto' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesCuartoRenta(inmueble: inmueble),
+      ));
+    }else if(inmueble.tipo == 'Departamento' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesDepartamentoRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Hacienda' && inmueble.operacion == 'Renta') {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesHaciendaRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Hotel' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesHotelRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Local' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesLocalRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Oficina' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesOficinaRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Rancho' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesRanchoRenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Terreno' && inmueble.operacion == 'Renta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesTerrenoRenta(inmueble: inmueble,)
+      ));
     }
   }
 
