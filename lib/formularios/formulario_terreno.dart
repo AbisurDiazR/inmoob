@@ -11,9 +11,9 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:toast/toast.dart';
 
-class AgregarTerreno extends StatefulWidget{
-  
+class AgregarTerreno extends StatefulWidget {
   @override
   _AgregarTerrenoState createState() => _AgregarTerrenoState();
 }
@@ -92,7 +92,6 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
 
   //String seleccion de disponibilidad de servicios
   String _mySelectionServices;
-
 
   @override
   Widget build(BuildContext context) {
@@ -183,20 +182,20 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
                 //Seleccion de servicios
                 Center(
                   child: DropdownButton(
-                    items: <String>['Si','No']
-                      .map<DropdownMenuItem<String>>((String value){
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String newVal){
-                        setState(() {
-                          _mySelectionServices = newVal;
-                        });
-                      },
-                      hint: Text('Servicios disponibles'),
-                      value: _mySelectionServices,
+                    items: <String>['Si', 'No']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String newVal) {
+                      setState(() {
+                        _mySelectionServices = newVal;
+                      });
+                    },
+                    hint: Text('Servicios disponibles'),
+                    value: _mySelectionServices,
                   ),
                 ),
 
@@ -204,9 +203,8 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
                 TextFormField(
                   controller: _descripcionController,
                   decoration: InputDecoration(
-                    hintText: 'Descripcion (opcional)',
-                    labelText: 'Descripcion (opcional)'
-                  ),
+                      hintText: 'Descripcion (opcional)',
+                      labelText: 'Descripcion (opcional)'),
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
                 ),
@@ -254,7 +252,7 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
     );
   }
 
-  _agregarInmueble() async{
+  _agregarInmueble() async {
     var id = new Random();
     String ubicacion = _ubicacionController.text;
     int precio = int.tryParse(_precioController.text);
@@ -266,31 +264,35 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
     String servicios = _mySelectionServices.toString();
 
     final inmueble = Inmueble(
-      id: id.nextInt(1000),
-      ubicacion: ubicacion, 
-      precio: precio,
-      moneda: moneda,
-      superficieTotal: superficieTotal,
-      operacion: operacion,
-      descripcion: descripcion,
-      fotos: fotos,
-      tipo: 'Terreno',
-      servicios: servicios
-    );
-    inmueblesBloc.agregarInmueble(inmueble);
+        id: id.nextInt(1000),
+        ubicacion: ubicacion,
+        precio: precio,
+        moneda: moneda,
+        superficieTotal: superficieTotal,
+        operacion: operacion,
+        descripcion: descripcion,
+        fotos: fotos,
+        tipo: 'Terreno',
+        servicios: servicios);
+    if (fotos.length == 0) {
+      Toast.show('Debe añadir fotos para registrar', context);
+    } else {
+      inmueblesBloc.agregarInmueble(inmueble);
+      Navigator.pop(context);
+    }
   }
 
-  Future<File> writeToFile(ByteData data, Asset asset) async{
+  Future<File> writeToFile(ByteData data, Asset asset) async {
     final buffer = data.buffer;
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
     var filePath = tempPath + '/' + asset.name;
     identifiers += tempPath + '/' + asset.name + "\n";
     return File(filePath).writeAsBytes(
-      buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
+        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
   }
 
-  Future<File> fileName(Asset asset) async{
+  Future<File> fileName(Asset asset) async {
     File filePath = await writeToFile(await asset.getByteData(), asset);
     return filePath;
   }

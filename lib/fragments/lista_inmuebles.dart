@@ -34,17 +34,14 @@ class ListaInmuebles extends StatelessWidget {
 
         return ListView.builder(
           itemCount: inmuebles.length,
-          itemBuilder: (context, i) => Dismissible(
-            key: UniqueKey(),
-            background: Container(
-              color: Colors.orangeAccent,
-            ),
-            onDismissed: (direction) =>
-                inmueblesBloc.borrarInmueble(inmuebles[i].id),
-            child: Card(
+          itemBuilder: (context, i) {
+            return Card(
               child: Column(
                 children: <Widget>[
                   ListTile(
+                    onLongPress: () {
+                      _showDialog(inmuebles[i].id, context);
+                    },
                     leading: Image.file(
                       fileName(firstPath(inmuebles[i].fotos)),
                       width: 100.0,
@@ -111,8 +108,8 @@ class ListaInmuebles extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
+            );
+          },          
         );
       },
     );
@@ -147,5 +144,32 @@ class ListaInmuebles extends StatelessWidget {
     var string = moneda;
     String newString = string.substring(string.length - 5);
     return newString;
+  }
+
+  void _showDialog(id, context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ventana confirmacion'),
+          content: Text('¿Desea borrar el inmueble?'),
+          actions: <Widget>[
+            new FlatButton(
+              child: Text('No'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            new FlatButton(
+              child: Text('Si'),
+              onPressed: () {
+                inmueblesBloc.borrarInmueble(id);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 }

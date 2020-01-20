@@ -11,6 +11,7 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'dart:typed_data';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:toast/toast.dart';
 
 class AgregarHotel extends StatefulWidget{
 
@@ -297,7 +298,12 @@ class _AgregarHotelState extends State<AgregarHotel> {
       fotos: fotos,
       tipo: 'Hotel',
     );
-    inmueblesBloc.agregarInmueble(inmueble);
+    if (fotos.length == 0) {
+      Toast.show('Debe añadir fotos para registrar', context);
+    } else {
+      inmueblesBloc.agregarInmueble(inmueble);
+      Navigator.pop(context);
+    }
   }
 
   Future<File> writeToFile(ByteData data, Asset asset) async{
