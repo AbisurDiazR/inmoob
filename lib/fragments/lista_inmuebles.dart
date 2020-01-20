@@ -4,7 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inmoob/bloc/inmuebles_bloc.dart';
+import 'package:inmoob/detalles_venta/detalles_bodega_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_casa_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_cuarto_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_departamento_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_hacienda_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_hotel_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_local_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_oficina_venta.dart';
+import 'package:inmoob/detalles_venta/detalles_rancho.dart';
+import 'package:inmoob/detalles_venta/detalles_terreno_venta.dart';
 //import 'package:inmoob/providers/db_provider.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
 import 'package:inmoob/providers/db_provider.dart';
@@ -135,7 +144,44 @@ class ListaInmuebles extends StatelessWidget {
               inmueble: inmueble,
             ),
           ));
-    } else if (inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta') {
+    }else if(inmueble.tipo == 'Bodega' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesBodegaVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Cuarto' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesCuartoVenta(inmueble: inmueble),
+      ));
+    }else if(inmueble.tipo == 'Departamento' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesDepartamentoVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Hacienda' && inmueble.operacion == 'Venta') {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesHaciendaVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Hotel' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesHotelVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Local' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesLocalVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Oficina' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesOficinaVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Rancho' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesRanchoVenta(inmueble: inmueble,)
+      ));
+    }else if(inmueble.tipo == 'Terreno' && inmueble.operacion == 'Venta'){
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => DetallesTerrenoVenta(inmueble: inmueble,)
+      ));
+    }
+    else if (inmueble.tipo == 'Casa' && inmueble.operacion == 'Renta') {
       print('Redirigiendo a renta....');
     }
   }
