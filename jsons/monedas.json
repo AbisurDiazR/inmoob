@@ -1,0 +1,72 @@
+[
+    {
+        "id": 0,
+        "name": "Dólar estadounidense",
+        "code": "USD",
+        "symbol": "$",
+        "fullname":"Dólar estadounidense USD $"
+    },
+    {
+        "id": 1,
+        "name": "Euro",
+        "code": "EUR",
+        "symbol": "€",
+        "fullname":"Euro EUR USD €"
+    },
+    {
+        "id": 2,
+        "name": "Dólar australiano",
+        "code": "AUD",
+        "symbol": "A$",
+        "fullname": "Dolar australiano AUD A$"
+    },
+    {
+        "id": 3,
+        "name": "Dólar canadiense",
+        "code": "CAD",
+        "symbol": "C$",
+        "fullname": "Dolar canadiense CAD C$"
+    },
+    {
+        "id": 4,
+        "name": "Franco suizo",
+        "code": "CHF",
+        "symbol": "SFr",
+        "fullname": "Franco suizo CHF SFr"
+    },
+    {
+        "id": 5,
+        "name": "Yen japonés",
+        "code": "JPY",
+        "symbol": "¥",
+        "fullname": "Yen japonés JPY ¥"
+    },
+    {
+        "id": 6,
+        "name": "Libra esterlina",
+        "code": "GBP",
+        "symbol": "£",
+        "fullname": "Libra esterlina GBP £"
+    },
+    {
+        "id": 7,
+        "name": "Peso mexicacno",
+        "code": "MXN",
+        "symbol": "$",
+        "fullname": "Peso mexicano MXN $"
+    },
+    {
+        "id": 8,
+        "name": "Yuan",
+        "code": "CNY",
+        "symbol": "¥",
+        "fullname": "Yuan CNY ¥"
+    },
+    {
+        "id": 9,
+        "name": "Dolar neozelandes",
+        "code": "NZD",
+        "symbol": "NZ$",
+        "fullname": "Dolar neozelandes NZD NZ$"
+    }
+]
