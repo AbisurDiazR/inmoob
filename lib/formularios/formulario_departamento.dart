@@ -297,7 +297,7 @@ class _AgregarDepartamentoState extends State<AgregarDepartamento> {
       fotos: fotos,
       tipo: 'Departamento',
     );
-    if (fotos.length == 0) {
+    if (fotos.length == 0 || moneda == 'null' || operacion == 'null') {
       Toast.show('Debe añadir fotos para registrar', context);
     } else {
       inmueblesBloc.agregarInmueble(inmueble);

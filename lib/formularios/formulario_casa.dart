@@ -293,7 +293,7 @@ class AgregarCasaState extends State<AgregarCasa> {
       fotos: fotos,
       tipo: 'Casa',
     );
-    if (fotos.length == 0) {
+    if (fotos.length == 0 || moneda == 'null' || operacion == 'null') {
       Toast.show('Debe añadir fotos para registrar', context);
     } else {
       inmueblesBloc.agregarInmueble(inmueble);

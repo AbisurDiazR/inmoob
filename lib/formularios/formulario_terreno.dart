@@ -274,7 +274,7 @@ class _AgregarTerrenoState extends State<AgregarTerreno> {
         fotos: fotos,
         tipo: 'Terreno',
         servicios: servicios);
-    if (fotos.length == 0) {
+    if (fotos.length == 0 || moneda == 'null' || operacion == 'null') {
       Toast.show('Debe añadir fotos para registrar', context);
     } else {
       inmueblesBloc.agregarInmueble(inmueble);

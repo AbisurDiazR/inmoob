@@ -284,7 +284,7 @@ class _AgregarOficinaState extends State<AgregarOficina> {
       fotos: fotos,
       tipo: 'Oficina',
     );
-    if (fotos.length == 0) {
+    if (fotos.length == 0 || moneda == 'null' || operacion == 'null') {
       Toast.show('Debe añadir fotos para registrar', context);
     } else {
       inmueblesBloc.agregarInmueble(inmueble);

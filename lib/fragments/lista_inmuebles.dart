@@ -63,6 +63,7 @@ class ListaInmuebles extends StatelessWidget {
                     },
                     leading: Image.file(
                       fileName(firstPath(inmuebles[i].fotos)),
+                      //'assets/house.png'
                       width: 100.0,
                       height: 100.0,
                     ),
