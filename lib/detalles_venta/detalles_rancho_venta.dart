@@ -3,24 +3,22 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
-//import 'package:inmoob/providers/db_provider.dart';
 
-class DetallesBodegaVenta extends StatefulWidget {
+class DetallesRanchoVenta extends StatefulWidget{
   final Inmueble inmueble;
 
-  const DetallesBodegaVenta({Key key, this.inmueble}) : super(key: key);
+  const DetallesRanchoVenta({Key key, this.inmueble}) : super(key: key);
 
   @override
-  _DetallesBodegaVentaState createState() => _DetallesBodegaVentaState();
+  _DetallesRanchoVentaState createState() => _DetallesRanchoVentaState();
 }
 
-class _DetallesBodegaVentaState extends State<DetallesBodegaVenta> {
+class _DetallesRanchoVentaState extends State<DetallesRanchoVenta> {
   List<String> imageList;
   List<String> _assetsList = List<String>();
   final _key = GlobalKey<FormState>();
 
-  Widget build(BuildContext context) {
-    //final Inmueble inmueble = DBprovider.db.getInmuebleById(widget.inmueble.id) as Inmueble;
+  Widget build(BuildContext context){
     imageList = widget.inmueble.fotos.split('\n');
     RegExp regExp =
         new RegExp('/data/user/0/com.propiedades.inmo.inmoob/cache/');
@@ -36,7 +34,7 @@ class _DetallesBodegaVentaState extends State<DetallesBodegaVenta> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalles de la ' + widget.inmueble.tipo),
+        title: Text('Detalles de '+widget.inmueble.tipo),
       ),
       body: SingleChildScrollView(
         child: Container(

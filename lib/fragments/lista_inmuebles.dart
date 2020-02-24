@@ -22,7 +22,7 @@ import 'package:inmoob/detalles_venta/detalles_hacienda_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_hotel_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_local_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_oficina_venta.dart';
-import 'package:inmoob/detalles_venta/detalles_rancho.dart';
+import 'package:inmoob/detalles_venta/detalles_rancho_venta.dart';
 import 'package:inmoob/detalles_venta/detalles_terreno_venta.dart';
 //import 'package:inmoob/providers/db_provider.dart';
 import 'package:inmoob/modelos/inmueble_model.dart';
