@@ -43,6 +43,7 @@ class _DetallesBodegaVentaState extends State<DetallesBodegaVenta> {
           child: Form(
             key: _key,
             child: Column(
+              //Galeria de las fotos
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.all(16.0),
@@ -60,6 +61,80 @@ class _DetallesBodegaVentaState extends State<DetallesBodegaVenta> {
                       );
                     }),
                   ),
+                ),
+
+                //Input de ubicacion de la propiedad
+                TextFormField(                  
+                  //controller: _ubicacionController,                  
+                  initialValue: widget.inmueble.ubicacion,
+                  decoration: InputDecoration(
+                      icon: Icon(Icons.location_on),
+                      hintText: 'Ubicación del inmueble',
+                      labelText: 'Ubicación del inmueble'),
+                ),
+
+                //Input del precio de la propiedad
+                TextFormField(
+                  initialValue: widget.inmueble.precio.toString(),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.attach_money),
+                    hintText: 'Precio del inmueble',
+                    labelText: 'Precio del inmueble',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+
+                //Input del total de superficie
+                TextFormField(
+                  initialValue: widget.inmueble.superficieTotal.toString(),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.swap_horizontal_circle),
+                    hintText: 'Superficie total',
+                    labelText: 'Superficie total',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+
+                //Input de la superficie cubierta
+                TextFormField(
+                  initialValue: widget.inmueble.superficieCubierta.toString(),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.swap_horizontal_circle),
+                    hintText: 'Superficie cubierta',
+                    labelText: 'Superficie cubierta',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+
+                //Input numero de baños
+                TextFormField(
+                  initialValue: widget.inmueble.numeroSanitarios.toString(),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.whatshot),
+                    hintText: 'Numero de baños',
+                    labelText: 'Numero de baños',
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+
+                //TextArea descripcion del inmueble
+                TextFormField(
+                  initialValue: widget.inmueble.descripcion,
+                  decoration: InputDecoration(
+                    hintText: 'Descripcion (opcional)',
+                    labelText: 'Descripcion (opcional)'
+                  ),
+                  maxLines: null,
+                  keyboardType: TextInputType.multiline,
+                ),
+
+                //Botón para actualizar el inmueble
+                FlatButton.icon(
+                  icon: Icon(Icons.add_box),
+                  label: Text('Actualizar'),
+                  onPressed: _actualizarInmueble,
+                  focusColor: Colors.lightBlueAccent,
+                  color: Colors.blue,
                 )
               ],
             ),
@@ -67,5 +142,10 @@ class _DetallesBodegaVentaState extends State<DetallesBodegaVenta> {
         ),
       ),
     );
+  }
+
+  //actualizar inmueble
+  _actualizarInmueble() async{
+    
   }
 }

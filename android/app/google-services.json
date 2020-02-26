@@ -1,0 +1,95 @@
+{
+  "project_info": {
+    "project_number": "885084785430",
+    "firebase_url": "https://inmoob-1557996113963.firebaseio.com",
+    "project_id": "inmoob-1557996113963",
+    "storage_bucket": "inmoob-1557996113963.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885084785430:android:5f850f7766f21551",
+        "android_client_info": {
+          "package_name": "com.propiedades.inmo.inmoob"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4d6qonVoGLbcEAd42xzQF2mfh9nKrw68"
+        },
+        {
+          "current_key": "AIzaSyDymbN5BE3U03wHGJ_q0Z2s_sJA4YpqSkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885084785430:android:3259496d0036856e35de37",
+        "android_client_info": {
+          "package_name": "com.propiedades.inmo.inmoob.free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885084785430-970ritphq9ifucintvpuij8lv3u0rr0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.propiedades.inmo.inmoob.free",
+            "certificate_hash": "381d1611f3ce37495af27a41be66d49e44e619d9"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4d6qonVoGLbcEAd42xzQF2mfh9nKrw68"
+        },
+        {
+          "current_key": "AIzaSyDymbN5BE3U03wHGJ_q0Z2s_sJA4YpqSkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885084785430:android:eda27b444a09218f35de37",
+        "android_client_info": {
+          "package_name": "com.propiedades.inmo.inmoob.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885084785430-4cpmqgiq1f752j5ceq387gm2vpif1fkq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.propiedades.inmo.inmoob.pro",
+            "certificate_hash": "381d1611f3ce37495af27a41be66d49e44e619d9"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4d6qonVoGLbcEAd42xzQF2mfh9nKrw68"
+        },
+        {
+          "current_key": "AIzaSyDymbN5BE3U03wHGJ_q0Z2s_sJA4YpqSkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'dart:io';
-import 'dart:math';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inmoob/bloc/inmuebles_bloc.dart';
-import 'package:inmoob/modelos/inmueble_model.dart';
-//import 'package:inmoob/providers/db_provider.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
 
 class AgregarCuarto extends StatefulWidget{
@@ -80,6 +78,8 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
   final _keyForm = GlobalKey<FormState>();
 
   String identifiers = "";
+  String _uploadedFileUrl;
+  ProgressDialog pr;
 
   final _ubicacionController = TextEditingController();
 
@@ -99,6 +99,8 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
 
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context, type: ProgressDialogType.Normal);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Inmoob'),
@@ -245,7 +247,6 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
                   crossAxisCount: 3,
                   children: List.generate(images.length, (index){
                     Asset asset = images[index];        
-                    fileName(asset);
                     return AssetThumb(
                       asset: asset,
                       height: 300,
@@ -258,7 +259,7 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
                 FlatButton.icon(
                   icon: Icon(Icons.add_box),
                   label: Text('Añadir inmueble'),
-                  onPressed: _agregarInmueble,
+                  onPressed: _agregarCuarto,
                   focusColor: Colors.lightBlueAccent,
                   color: Colors.blue,
                 )
@@ -270,8 +271,7 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
     );
   }
 
-  _agregarInmueble() async{
-    var id = new Random();
+  _agregarCuarto() async {
     String ubicacion = _ubicacionController.text;
     int precio = int.tryParse(_precioController.text);
     String moneda = _mySelectionMoney.toString();
@@ -281,42 +281,46 @@ class _AgregarCuartoState extends State<AgregarCuarto> {
     int numeroSanitarios = int.tryParse(_numeroSanitatriosController.text);
     String operacion = _mySelectionOps.toString();
     String descripcion = _descripcionController.text;
-    String fotos = identifiers;
+    List<String> _urls = List<String>();
 
-    final inmueble = Inmueble(
-      id: id.nextInt(1000),
-      ubicacion: ubicacion, 
-      precio: precio,
-      moneda: moneda,
-      superficieTotal: superficieTotal,
-      superficieCubierta: superficieCubierta,
-      numeroRecamaras: numeroCuartos,
-      numeroSanitarios: numeroSanitarios,
-      operacion: operacion,
-      descripcion: descripcion,
-      fotos: fotos,
-      tipo: 'Cuarto',
-    );
-    if (fotos.length == 0 || moneda == 'null' || operacion == 'null') {
-      Toast.show('Debe añadir fotos para registrar', context);
+    if (images.length != 0 || moneda == 'null' || operacion == 'null') {
+      pr.show();
+
+      for (var i = 0; i < images.length; i++) {
+        ByteData byteData = await images[i].requestOriginal();
+        List<int> imageData = byteData.buffer.asUint8List();
+        StorageReference ref =
+            FirebaseStorage.instance.ref().child(images[i].name);
+        StorageUploadTask uploadTask = ref.putData(imageData);
+        StorageTaskSnapshot snapshot = await uploadTask.onComplete;
+        _uploadedFileUrl = await snapshot.ref.getDownloadURL();
+        print(_uploadedFileUrl);
+        _urls.add(_uploadedFileUrl);
+        pr.update(message: 'Subiendo: ' + images[i].name);
+      }
+
+      FirebaseDatabase database = FirebaseDatabase.instance;
+      database.reference().child('inmuebles').push().set({
+        'ubicacion': ubicacion,
+        'precio': precio,
+        'moneda': moneda,
+        'superficie_total': superficieTotal,
+        'superficie_cubierta': superficieCubierta,
+        'numero_recamaras': numeroCuartos,
+        'numero_sanitarios': numeroSanitarios,
+        'operacion': operacion,
+        'descripcion': descripcion,
+        'fotos': _urls,
+        'tipo': 'Cuarto'
+      }).whenComplete(_tareaCompletada);
     } else {
-      inmueblesBloc.agregarInmueble(inmueble);
-      Navigator.pop(context);
+      Toast.show("Campos incomplentos", context);
     }
   }
 
-  Future<File> writeToFile(ByteData data, Asset asset) async{
-    final buffer = data.buffer;
-    Directory tempDir = await getTemporaryDirectory();
-    String tempPath = tempDir.path;
-    var filePath = tempPath + '/' + asset.name;
-    identifiers += tempPath + '/' + asset.name + "\n";
-    return File(filePath).writeAsBytes(
-      buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
-  }
-
-  Future<File> fileName(Asset asset) async{
-    File filePath = await writeToFile(await asset.getByteData(), asset);
-    return filePath;
+  _tareaCompletada() {
+    pr.update(message: 'Registro finalizado');
+    pr.hide();
+    Navigator.pop(context);
   }
 }
